@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Risk Pro</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="brand">
+      <img src="icons/icon32.png" alt="" width="20" height="20" />
+      <span class="brand-name">Risk Pro</span>
+      <span class="brand-host" id="host"></span>
+    </header>
+
+    <div class="mode" id="mode" role="group" aria-label="Explanation style" hidden>
+      <button type="button" id="mode-plain">Plain English</button>
+      <button type="button" id="mode-technical">Technical</button>
+    </div>
+
+    <section class="verdict" id="verdict" hidden>
+      <div class="verdict-title" id="verdict-title"></div>
+      <p class="verdict-text" id="verdict-text"></p>
+    </section>
+
+    <section class="summary" id="summary" hidden>
+      <div class="grade" id="grade" aria-label="Security grade"></div>
+      <div class="summary-body">
+        <div class="score"><span id="score"></span><span class="score-max"> / 100</span></div>
+        <div class="scan-note" id="scan-note"></div>
+        <div class="projection" id="projection" hidden></div>
+        <div class="score-meaning">This rates how the site is set up, not whether it is honest.</div>
+        <div class="counts">
+          <span class="count"><span class="dot dot-high"></span><b id="count-high">0</b> high</span>
+          <span class="count"><span class="dot dot-medium"></span><b id="count-medium">0</b> medium</span>
+          <span class="count"><span class="dot dot-low"></span><b id="count-low">0</b> low</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="notice" id="notice" hidden>
+      <p id="notice-text"></p>
+      <button id="notice-button" type="button" hidden>Reload page and scan</button>
+    </section>
+
+    <section class="clean" id="clean" hidden>
+      <div class="clean-title">Grade A, no surface issues</div>
+      <p>None of the passive checks found a problem. This does not mean the site is secure: it only covers what the browser can see.</p>
+    </section>
+
+    <div class="tabs" id="tabs" role="tablist" hidden>
+      <button type="button" class="tab" id="tab-findings" role="tab" aria-selected="true" aria-controls="panel-findings">Risks</button>
+      <button type="button" class="tab" id="tab-why" role="tab" aria-selected="false" aria-controls="panel-why">Why this score?</button>
+      <button type="button" class="tab" id="tab-learn" role="tab" aria-selected="false" aria-controls="panel-learn">Learn the basics</button>
+    </div>
+
+    <div id="panel-findings" role="tabpanel" aria-labelledby="tab-findings">
+      <ul class="findings" id="findings"></ul>
+    </div>
+
+    <div class="why" id="panel-why" role="tabpanel" aria-labelledby="tab-why" hidden>
+      <p class="why-math" id="why-math"></p>
+      <p class="why-next" id="why-next"></p>
+
+      <h2 class="why-title">Why it lost points</h2>
+      <table class="why-categories" id="why-categories" hidden>
+        <tbody></tbody>
+      </table>
+      <ul class="why-list" id="why-lost"></ul>
+
+      <h2 class="why-title">Why it did not lose more</h2>
+      <ul class="why-list" id="why-passed"></ul>
+
+      <div id="why-unchecked-box" hidden>
+        <h2 class="why-title">Not counted in this score</h2>
+        <ul class="why-list" id="why-unchecked"></ul>
+      </div>
+
+      <button type="button" class="copy-plan" id="copy-plan">Copy full fix plan</button>
+    </div>
+
+    <div class="learn" id="panel-learn" role="tabpanel" aria-labelledby="tab-learn" hidden></div>
+
+    <footer class="foot" id="foot" hidden></footer>
+
+    <template id="finding-template">
+      <li class="finding">
+        <div class="finding-head">
+          <span class="dot"></span>
+          <span class="finding-title"></span>
+        </div>
+        <div class="finding-category"></div>
+        <div class="finding-plain">
+          <p class="plain-means"><b>What this means for you:</b> <span></span></p>
+          <p class="plain-do"><b>What you can do:</b> <span></span></p>
+          <p class="plain-technical"></p>
+        </div>
+        <p class="finding-detail"></p>
+        <p class="finding-fix"><b>Fix:</b> <span></span></p>
+        <details class="finding-items" hidden>
+          <summary></summary>
+          <ul></ul>
+        </details>
+        <details class="mitigate" hidden>
+          <summary class="mitigate-summary">How to mitigate this</summary>
+          <p class="mitigate-owner"><b>Who fixes it:</b> <span></span></p>
+          <ol class="mitigate-steps"></ol>
+          <div class="mitigate-snippets"></div>
+          <p class="mitigate-visitor"><b>If you are only visiting:</b> <span></span></p>
+        </details>
+        <label class="simulate" hidden>
+          <input type="checkbox" />
+          <span>Preview score with this fixed</span>
+        </label>
+      </li>
+    </template>
+
+    <script src="mitigations.js"></script>
+    <script src="plainenglish.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
